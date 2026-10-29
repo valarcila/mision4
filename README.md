@@ -1,1 +1,16 @@
-# mision4
+# Misión 3
+
+
+## Cómo probarlo
+
+
+## Uso de IA
+Prompt 1. 
+
+Prompt 2. 
+
+
+## Autopsia
+Decisión 1. 
+
+Decisión 2. 
