@@ -6,6 +6,7 @@ export default function Formulario() {
     const { 
         register, 
         handleSubmit, 
+        reset,
         formState: { errors } 
     } = useForm({ 
         resolver: zodResolver(esquema),
@@ -19,15 +20,18 @@ export default function Formulario() {
 
     function onSubmit(data) {
         console.log(data)
+        reset()
     }
 
     return (
-        <form onSubmit = {handleSubmit(onSubmit)} noValidate>
+        <form className = "formulario" onSubmit = {handleSubmit(onSubmit)} noValidate>
+            <h2>Nuevo viaje</h2>
             <div className = "field">
                 <label htmlFor = "destino">Destino</label>
                 <input
                     type = "text"
                     id = "destino"
+                    placeholder = "Croacia"
                     aria-invalid = {!!errors.destino}
                     aria-describedby = {errors.destino ? "error-destino" : undefined}
                     {...register("destino")}
@@ -36,37 +40,42 @@ export default function Formulario() {
                     <span id = "error-destino" role = "alert">{errors.destino.message}</span>
                 }
             </div>
-            <div className = "field">
-                <label htmlFor = "salida">Salida</label>
-                <input
-                    type = "date"
-                    id = "salida"
-                    aria-invalid = {!!errors.salida}
-                    aria-describedby = {errors.salida ? "error-salida" : undefined}                    
-                    {...register("salida")}
-                />
-                {errors.salida && 
-                    <span id = "error-salida" role = "alert">{errors.salida.message}</span>
-                }
-            </div>
-            <div className = "field">
-                <label htmlFor = "regreso">Regreso</label>
-                <input
-                    type = "date"
-                    id = "regreso"
-                    aria-invalid = {!!errors.regreso}
-                    aria-describedby = {errors.regreso ? "error-regreso" : undefined} 
-                    {...register("regreso")}
-                />
-                {errors.regreso && 
-                    <span id = "error-regreso" role = "alert">{errors.regreso.message}</span>
-                }
+            <div className = "fechas">
+                <div className = "field">
+                    <label htmlFor = "salida">Salida</label>
+                    <input
+                        type = "text"
+                        id = "salida"
+                        placeholder = "aaaa-mm-dd"
+                        aria-invalid = {!!errors.salida}
+                        aria-describedby = {errors.salida ? "error-salida" : undefined}                    
+                        {...register("salida")}
+                    />
+                    {errors.salida && 
+                        <span id = "error-salida" role = "alert">{errors.salida.message}</span>
+                    }
+                </div>
+                <div className = "field">
+                    <label htmlFor = "regreso">Regreso</label>
+                    <input
+                        type = "text"
+                        id = "regreso"
+                        placeholder = "aaaa-mm-dd"
+                        aria-invalid = {!!errors.regreso}
+                        aria-describedby = {errors.regreso ? "error-regreso" : undefined} 
+                        {...register("regreso")}
+                    />
+                    {errors.regreso && 
+                        <span id = "error-regreso" role = "alert">{errors.regreso.message}</span>
+                    }
+                </div>
             </div>
             <div className = "field">
                 <label htmlFor = "presupuesto">Presupuesto</label>
                 <input
-                    type = "number"
+                    type = "text"
                     id = "presupuesto"
+                    placeholder = "500"
                     aria-invalid = {!!errors.presupuesto}
                     aria-describedby = {errors.presupuesto ? "error-presupuesto" : undefined} 
                     {...register("presupuesto")}

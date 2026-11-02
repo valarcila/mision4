@@ -6,7 +6,9 @@ function App() {
   return (
     <>
       <Header aplicacion = "ATLAS" autora = "Valeria"/>
-      <Formulario />
+      <main>
+        <Formulario />
+      </main>
     </>
   )
 }

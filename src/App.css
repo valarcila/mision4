@@ -1,0 +1,97 @@
+:root {
+    --blanco: #ffffff;
+    --claro: #a3b18a;
+    --verde: #3a5a40;
+    --oscuro: #344e41;
+}
+
+body {
+    background-color: var(--blanco);
+    color: var(--oscuro);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+header {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    letter-spacing: 3px;
+}
+
+header p {
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.formulario {
+    background-color: var(--blanco);
+    margin: 0px;
+    padding: 20px;
+    border: 1px solid var(--oscuro);
+    border-radius: 5px;
+}
+
+.formulario h2 {
+    margin: 0px 0px 20px;
+}
+
+.formulario button {
+    background-color: var(--claro);
+    color: var(--blanco);
+    display: block;
+    margin: 0 auto;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario button:hover {
+    background-color: var(--oscuro);
+}
+
+.formulario > .field:last-of-type {
+    margin-bottom: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 10px 0px;
+}
+
+.field input {
+    padding: 10px;
+    border: 1px solid var(--claro);
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.field input:focus {
+    border-color: var(--oscuro);
+    color: var(--oscuro);
+    outline: none;
+}
+
+.field input::placeholder {
+    color: var(--claro);
+}
+
+.field span {
+    color: var(--claro)
+}
+
+.fechas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
