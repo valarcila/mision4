@@ -3,6 +3,7 @@
     --claro: #a3b18a;
     --verde: #3a5a40;
     --oscuro: #344e41;
+    --rojo: #a33a32;
 }
 
 body {
@@ -87,7 +88,7 @@ main {
 }
 
 .field span {
-    color: var(--claro)
+    color: var(--rojo)
 }
 
 .fechas {
