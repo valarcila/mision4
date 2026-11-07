@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Field from "./Field"
 import { esquema } from "../esquema"
 
 export default function Formulario() {
@@ -26,64 +27,39 @@ export default function Formulario() {
     return (
         <form className = "formulario" onSubmit = {handleSubmit(onSubmit)} noValidate>
             <h2>Nuevo viaje</h2>
-            <div className = "field">
-                <label htmlFor = "destino">Destino</label>
-                <input
-                    type = "text"
-                    id = "destino"
-                    placeholder = "Croacia"
-                    aria-invalid = {!!errors.destino}
-                    aria-describedby = {errors.destino ? "error-destino" : undefined}
-                    {...register("destino")}
-                />
-                {errors.destino && 
-                    <span id = "error-destino" role = "alert">{errors.destino.message}</span>
-                }
-            </div>
+            <Field 
+                id = "destino"
+                etiqueta = "Destino"
+                placeholder = "Croacia"
+                register = {register}
+                error = {errors.destino}
+            />
             <div className = "fechas">
-                <div className = "field">
-                    <label htmlFor = "salida">Salida</label>
-                    <input
-                        type = "text"
-                        id = "salida"
-                        placeholder = "aaaa-mm-dd"
-                        aria-invalid = {!!errors.salida}
-                        aria-describedby = {errors.salida ? "error-salida" : undefined}                    
-                        {...register("salida")}
-                    />
-                    {errors.salida && 
-                        <span id = "error-salida" role = "alert">{errors.salida.message}</span>
-                    }
-                </div>
-                <div className = "field">
-                    <label htmlFor = "regreso">Regreso</label>
-                    <input
-                        type = "text"
-                        id = "regreso"
-                        placeholder = "aaaa-mm-dd"
-                        aria-invalid = {!!errors.regreso}
-                        aria-describedby = {errors.regreso ? "error-regreso" : undefined} 
-                        {...register("regreso")}
-                    />
-                    {errors.regreso && 
-                        <span id = "error-regreso" role = "alert">{errors.regreso.message}</span>
-                    }
-                </div>
-            </div>
-            <div className = "field">
-                <label htmlFor = "presupuesto">Presupuesto</label>
-                <input
-                    type = "text"
-                    id = "presupuesto"
-                    placeholder = "500"
-                    aria-invalid = {!!errors.presupuesto}
-                    aria-describedby = {errors.presupuesto ? "error-presupuesto" : undefined} 
-                    {...register("presupuesto")}
+                <Field 
+                    id = "salida"
+                    etiqueta = "Salida"
+                    inputMode = "numeric"
+                    placeholder = "aaaa-mm-dd"
+                    register = {register}
+                    error = {errors.salida}
                 />
-                {errors.presupuesto && 
-                    <span id = "error-presupuesto" role = "alert">{errors.presupuesto.message}</span>
-                }
+                <Field 
+                    id = "regreso"
+                    etiqueta = "Regreso"
+                    inputMode = "numeric"
+                    placeholder = "aaaa-mm-dd"
+                    register = {register}
+                    error = {errors.regreso}
+                />
             </div>
+            <Field 
+                id = "presupuesto"
+                etiqueta = "Presupuesto"
+                inputMode = "numeric"
+                placeholder = "500"
+                register = {register}
+                error = {errors.presupuesto}
+            />
             <button type = "submit" disabled = {isSubmitting}>Guardar</button>
         </form>
     )

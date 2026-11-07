@@ -58,6 +58,11 @@ main {
     background-color: var(--oscuro);
 }
 
+.formulario button:disabled {
+    cursor:not-allowed;
+}
+
+
 .formulario > .field:last-of-type {
     margin-bottom: 20px;
 }
