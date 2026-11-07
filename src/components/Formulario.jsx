@@ -7,7 +7,7 @@ export default function Formulario() {
         register, 
         handleSubmit, 
         reset,
-        formState: { errors } 
+        formState: { errors, isSubmitting } 
     } = useForm({ 
         resolver: zodResolver(esquema),
         defaultValues: {
@@ -84,7 +84,7 @@ export default function Formulario() {
                     <span id = "error-presupuesto" role = "alert">{errors.presupuesto.message}</span>
                 }
             </div>
-            <button type = "submit">Guardar</button>
+            <button type = "submit" disabled = {isSubmitting}>Guardar</button>
         </form>
     )
 }

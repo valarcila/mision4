@@ -1,29 +1,21 @@
 import { z } from "zod"
+import { validarFecha, obtenerHoy } from "./logic"
 
 export const esquema = z
     .object({
         destino: z.string().trim().min(3, "Destino debe tener al menos tres caracteres"),
-        // convertir string en objeto date
-        salida: z.coerce.date({error: "Salida debe ser válida"}),
-        regreso: z.coerce.date({error: "Regreso debe ser válido"}),
-        presupuesto: z.coerce.number().positive("Presupuesto debe ser mayor que cero")
+        // validarFecha(data.salida), validar formato y comprobar existencia
+        salida: z.string().refine(validarFecha, {error: "Salida debe ser fecha válida"}),
+        regreso: z.string().refine(validarFecha, {error: "Regreso debe ser fecha válida"}),
+        presupuesto: z.coerce.number({error: "Presupuesto debe ser número válido"})
+            .positive("Presupuesto debe ser mayor que cero")
+            .max(1000, "Presupuesto no debe superar los mil euros")
     })
-    .refine((data) => {
-        const hoy = new Date()
-
-        const fechaHoy = new Date(
-            Date.UTC(
-                hoy.getFullYear(),
-                hoy.getMonth(),
-                hoy.getDate()
-            )
-        )
-        return data.salida >= fechaHoy
-    }, {
+    .refine((data) => new Date(data.salida) >= obtenerHoy(), {
         error: "Salida debe ser hoy o posterior",
         path: ["salida"]
     })
-    .refine((data) => data.regreso > data.salida, {
+    .refine((data) => new Date(data.regreso) > new Date(data.salida), {
         error: "Regreso debe ser posterior a salida",
         path: ["regreso"]
     })
