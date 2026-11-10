@@ -1,5 +1,6 @@
 import Formulario from './components/Formulario'
 import Header from './components/Header'
+import Viajes from './components/Viajes'
 import './App.css'
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
       <Header aplicacion = "ATLAS" autora = "Valeria"/>
       <main>
         <Formulario />
-      </main>
+        <Viajes />
+      </main>   
     </>
   )
 }

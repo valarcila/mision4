@@ -1,14 +1,18 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
+import { useEnviarViaje } from "../hooks/useViajes"
 import { esquema } from "../esquema"
 
 export default function Formulario() {
+    // gestionar envio viaje
+    const mutacion = useEnviarViaje()
+
     const { 
         register, 
         handleSubmit, 
         reset,
-        formState: { errors, isSubmitting } 
+        formState: { errors } 
     } = useForm({ 
         resolver: zodResolver(esquema),
         defaultValues: {
@@ -21,7 +25,9 @@ export default function Formulario() {
 
     function onSubmit(data) {
         console.log(data)
-        reset()
+        mutacion.mutate(data, {
+            onSuccess: () => reset()
+        })
     }
 
     return (
@@ -60,7 +66,7 @@ export default function Formulario() {
                 register = {register}
                 error = {errors.presupuesto}
             />
-            <button type = "submit" disabled = {isSubmitting}>Guardar</button>
+            <button type = "submit" disabled = {mutacion.isPending}>Guardar</button>
         </form>
     )
 }
