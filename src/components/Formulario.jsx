@@ -24,7 +24,6 @@ export default function Formulario() {
     })
 
     function onSubmit(data) {
-        console.log(data)
         mutacion.mutate(data, {
             onSuccess: () => reset()
         })
@@ -44,16 +43,14 @@ export default function Formulario() {
                 <Field 
                     id = "salida"
                     etiqueta = "Salida"
-                    inputMode = "numeric"
-                    placeholder = "aaaa-mm-dd"
+                    type = "date"
                     register = {register}
                     error = {errors.salida}
                 />
                 <Field 
                     id = "regreso"
                     etiqueta = "Regreso"
-                    inputMode = "numeric"
-                    placeholder = "aaaa-mm-dd"
+                    type = "date"
                     register = {register}
                     error = {errors.regreso}
                 />
@@ -61,12 +58,20 @@ export default function Formulario() {
             <Field 
                 id = "presupuesto"
                 etiqueta = "Presupuesto"
-                inputMode = "numeric"
+                type = "number"
                 placeholder = "500"
                 register = {register}
                 error = {errors.presupuesto}
             />
-            <button type = "submit" disabled = {mutacion.isPending}>Guardar</button>
+            <button type = "submit" disabled = {mutacion.isPending}>
+                {mutacion.isPending ? "Enviando..." : "Enviar"}
+            </button>
+            {mutacion.isSuccess && (
+                <p role = "status">Enviado correctamente</p>
+            )}
+            {mutacion.isError && (
+                <p role = "alert">{mutacion.error.message}</p>
+            )}
         </form>
     )
 }

@@ -1,10 +1,9 @@
-export default function Field ({ id, etiqueta, inputMode, placeholder, register, error }) {
+export default function Field ({ id, etiqueta, type = "text", placeholder, register, error }) {
     return (
         <div className = "field">
             <label htmlFor = {id}>{etiqueta}</label>
             <input
-                type = "text"
-                inputMode = {inputMode}
+                type = {type}
                 id = {id}
                 placeholder = {placeholder}
                 aria-invalid = {!!error}

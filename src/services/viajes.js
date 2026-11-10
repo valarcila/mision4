@@ -1,9 +1,11 @@
 // api
 const API_URL = import.meta.env.VITE_API_URL
+const VIAJES_URL = `${API_URL}/viajes`
+
 
 // GET, obtener viajes
 export async function obtenerViajes() {
-    const respuesta = await fetch(`${API_URL}/viajes`)
+    const respuesta = await fetch(VIAJES_URL)
 
     if (!respuesta.ok) throw new Error("Error al obtener viajes")
 
@@ -13,7 +15,7 @@ export async function obtenerViajes() {
 
 // POST, enviar viaje
 export async function enviarViaje(viaje) {
-    const respuesta = await fetch(`${API_URL}/viajes`, {
+    const respuesta = await fetch(VIAJES_URL, {
         method: "POST",
         headers: {
             // indicar envio de json

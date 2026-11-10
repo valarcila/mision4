@@ -2,11 +2,20 @@ import Viaje from "./Viaje"
 import { useObtenerViajes } from "../hooks/useViajes"
 
 export default function Viajes() {
-    const { data, isPending, isError, error } = useObtenerViajes()
+    const { data, isPending, isError, error, refetch } = useObtenerViajes()
 
     if (isPending) return <p>Cargando viajes...</p>
 
-    if (isError) return <p role = "alert">{error.message}</p>
+    if (isError) {
+        return (
+            <div>
+                <p role = "alert">{error.message}</p>
+                <button type = "button" onClick = {() => refetch()}>
+                    Reintentar
+                </button>
+            </div>
+        )
+    }
 
     return (
         <section className = "contenedor_viajes">
