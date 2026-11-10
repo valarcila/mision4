@@ -1,9 +1,9 @@
-// jsonplaceholder, api
-const API_URL = "https://jsonplaceholder.typicode.com/posts"
+// api
+const API_URL = import.meta.env.VITE_API_URL
 
 // GET, obtener viajes
 export async function obtenerViajes() {
-    const respuesta = await fetch(API_URL)
+    const respuesta = await fetch(`${API_URL}/viajes`)
 
     if (!respuesta.ok) throw new Error("Error al obtener viajes")
 
@@ -13,7 +13,7 @@ export async function obtenerViajes() {
 
 // POST, enviar viaje
 export async function enviarViaje(viaje) {
-    const respuesta = await fetch(API_URL, {
+    const respuesta = await fetch(`${API_URL}/viajes`, {
         method: "POST",
         headers: {
             // indicar envio de json

@@ -8,8 +8,8 @@ function App() {
     <>
       <Header aplicacion = "ATLAS" autora = "Valeria"/>
       <main>
-        <Formulario />
         <Viajes />
+        <Formulario />
       </main>   
     </>
   )

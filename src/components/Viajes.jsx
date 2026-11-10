@@ -1,3 +1,4 @@
+import Viaje from "./Viaje"
 import { useObtenerViajes } from "../hooks/useViajes"
 
 export default function Viajes() {
@@ -8,9 +9,18 @@ export default function Viajes() {
     if (isError) return <p role = "alert">{error.message}</p>
 
     return (
-        <section>
+        <section className = "contenedor_viajes">
             <h2>Viajes</h2>
-            <p>Datos recibidos: {data.length}</p>
+
+            {data.length === 0 ? (
+                <p>No hay viajes planificados todavía.</p>
+            ) : (
+                <div className = "viajes">
+                    {data.map((viaje) => (
+                        <Viaje key = {viaje.id} viaje = {viaje} />
+                    ))}
+                </div>
+            )}
         </section>
     )
 }

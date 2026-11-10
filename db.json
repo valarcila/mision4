@@ -1,0 +1,12 @@
+{
+  "viajes": [
+    {
+      "destino": "Croacia",
+      "salida": "2027-01-23",
+      "regreso": "2027-01-30",
+      "presupuesto": 600,
+      "id": "VdsGshgHDu4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
