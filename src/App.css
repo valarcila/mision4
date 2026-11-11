@@ -4,6 +4,12 @@
     --verde: #3a5a40;
     --oscuro: #344e41;
     --rojo: #a33a32;
+    --espacio: 20px;
+    --radio: 5px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -14,72 +20,105 @@ body {
 }
 
 header {
-    margin: 0;
-    padding: 20px;
+    padding: var(--espacio);
     text-align: center;
 }
 
 header h1 {
     letter-spacing: 3px;
+    margin-bottom: var(--espacio);
 }
 
 header p {
     font-weight: bold;
+    margin: 0;
 }
 
 main {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio);
+    margin: 0 auto;
+    padding: var(--espacio);    
 }
 
-.formulario {
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--espacio);
+}
+
+.stat {
+    background-color: var(--oscuro);
+    color: var(--blanco);
+    text-align: center;
+    padding: var(--espacio);
+    border-radius: var(--radio);   
+}
+
+.contenedor_viajes, .formulario {
     background-color: var(--blanco);
-    margin: 0px;
-    padding: 20px;
+    padding: var(--espacio);
     border: 1px solid var(--oscuro);
-    border-radius: 5px;
+    border-radius: var(--radio);
 }
 
-.formulario h2 {
-    margin: 0px 0px 20px;
+.contenedor_viajes h2, .formulario h2 {
+    margin: 0 0 var(--espacio);
+}
+
+.viajes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--espacio);
+}
+
+.viaje {
+    background-color: var(--oscuro);
+    color: var(--blanco);
+    padding: var(--espacio);
+    border-radius: var(--radio);
 }
 
 .formulario button {
-    background-color: var(--claro);
+    background-color: var(--oscuro);
     color: var(--blanco);
+    font-weight: bold;
     display: block;
     margin: 0 auto;
-    padding: 20px 50px;
+    width: 100%;
+    padding: var(--espacio);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radio);
     cursor: pointer;
 }
 
 .formulario button:hover {
-    background-color: var(--oscuro);
+    background-color: var(--claro);
 }
 
 .formulario button:disabled {
+    background-color: var(--claro);
+    opacity: 0.5;
     cursor:not-allowed;
 }
 
-
 .formulario > .field:last-of-type {
-    margin-bottom: 20px;
+    margin-bottom: var(--espacio);
 }
 
 .field {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin: 10px 0px;
+    margin: 10px 0;
 }
 
 .field input {
     padding: 10px;
     border: 1px solid var(--claro);
-    border-radius: 5px;
+    border-radius: var(--radio);
     width: 100%;
-    box-sizing: border-box;
 }
 
 .field input:focus {
@@ -93,11 +132,21 @@ main {
 }
 
 .field span {
-    color: var(--rojo)
+    color: var(--rojo);
 }
 
 .fechas {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: var(--espacio);
+}
+
+.enviado, .error {
+    text-align: center;
+    padding-top: var(--espacio);
+    margin: 0;
+}
+
+.error {
+    color: var(--rojo);
 }

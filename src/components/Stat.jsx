@@ -1,8 +1,8 @@
-export default function Stat({ value, etiqueta }) {
+export default function Stat({ value, unidad }) {
     return (
         <article className = "stat">
             <h2>{value}</h2>
-            <p>{etiqueta}</p>
+            <p>{unidad}</p>
         </article>
     )
 }

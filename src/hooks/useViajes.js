@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { obtenerViajes, enviarViaje } from "../services/viajes"
+import { obtenerViajes, enviarViaje } from "../services/api"
 
 const VIAJES_KEY = ["viajes"]
 
@@ -18,7 +18,7 @@ export function useEnviarViaje() {
     return useMutation({
         mutationFn: enviarViaje,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: VIAJES_KEY })
+            return queryClient.invalidateQueries({ queryKey: VIAJES_KEY })
         }
     })
 }

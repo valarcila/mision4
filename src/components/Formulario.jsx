@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
 import { useEnviarViaje } from "../hooks/useViajes"
-import { esquema } from "../esquema"
+import { viaje } from "../schemas/viaje"
 
 export default function Formulario() {
     // gestionar envio viaje
@@ -14,7 +14,7 @@ export default function Formulario() {
         reset,
         formState: { errors } 
     } = useForm({ 
-        resolver: zodResolver(esquema),
+        resolver: zodResolver(viaje),
         defaultValues: {
             destino: "",
             salida: "",
@@ -67,10 +67,10 @@ export default function Formulario() {
                 {mutacion.isPending ? "Enviando..." : "Enviar"}
             </button>
             {mutacion.isSuccess && (
-                <p role = "status">Enviado correctamente</p>
+                <p className = "enviado" role = "status">Enviado correctamente</p>
             )}
             {mutacion.isError && (
-                <p role = "alert">{mutacion.error.message}</p>
+                <p className = "error" role = "alert">{mutacion.error.message}</p>
             )}
         </form>
     )

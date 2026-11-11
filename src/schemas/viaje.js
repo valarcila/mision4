@@ -1,7 +1,7 @@
 import { z } from "zod"
-import { obtenerHoy } from "./logic"
+import { obtenerHoy } from "../logic"
 
-export const esquema = z
+export const viaje = z
     .object({
         destino: z.string().trim().min(3, "Destino debe tener al menos tres caracteres"),
         salida: z.string().min(1, "Debe haber fecha de salida"),

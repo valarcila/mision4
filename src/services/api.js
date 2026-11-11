@@ -1,3 +1,5 @@
+import { viajes } from "../schemas/viajes"
+
 // api
 const API_URL = import.meta.env.VITE_API_URL
 const VIAJES_URL = `${API_URL}/viajes`
@@ -10,7 +12,14 @@ export async function obtenerViajes() {
     if (!respuesta.ok) throw new Error("Error al obtener viajes")
 
     // convertir json en js
-    return respuesta.json()
+    const data = await respuesta.json()
+
+    // comprobar data con zod
+    const resultado = viajes.safeParse(data)
+
+    if (!resultado.success) throw new Error("Viajes recibidos no válidos")
+
+    return resultado.data
 }
 
 // POST, enviar viaje
