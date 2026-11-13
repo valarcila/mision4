@@ -12,6 +12,7 @@ export default function Formulario() {
     const { 
         register, 
         handleSubmit, 
+        watch,
         reset,
         formState: { errors, isSubmitting } 
     } = useForm({ 
@@ -26,6 +27,9 @@ export default function Formulario() {
         }
     })
 
+    // observar cambios salida
+    const salida = watch("salida")
+
     function onSubmit(data) {
         mutacion.mutate(data, {
             onSuccess: () => reset()
@@ -33,7 +37,15 @@ export default function Formulario() {
     }
 
     return (
-        <form className = "formulario" onSubmit = {handleSubmit(onSubmit)} noValidate>
+        <form 
+            className = "formulario" 
+            onSubmit = {handleSubmit(onSubmit)} 
+            onChange = {() => {
+                // desaparecer mensaje anterior
+                if (mutacion.isSuccess || mutacion.isError) mutacion.reset()
+            }}
+            noValidate
+        >
             <h2>Nuevo viaje</h2>
             <Field 
                 id = "destino"
@@ -55,7 +67,7 @@ export default function Formulario() {
                     id = "regreso"
                     etiqueta = "Regreso"
                     type = "date"
-                    min = {obtenerHoy()}
+                    min = {salida || obtenerHoy()}
                     error = {errors.regreso}
                     register = {register}
                 />

@@ -9,7 +9,9 @@ const VIAJES_URL = `${API_URL}/viajes`
 export async function obtenerViajes() {
     const respuesta = await fetch(VIAJES_URL)
 
-    if (!respuesta.ok) throw new Error("Error al obtener viajes")
+    if (!respuesta.ok) {
+        throw new Error(`Error al obtener viajes. HTTP ${respuesta.status}`)
+    }
 
     // convertir json en js
     const data = await respuesta.json()
@@ -34,7 +36,20 @@ export async function enviarViaje(viaje) {
         body: JSON.stringify(viaje)
     })
 
-    if (!respuesta.ok) throw new Error("Error al enviar viaje")
+    if (!respuesta.ok) {
+        throw new Error(`Error al enviar viaje. HTTP ${respuesta.status}`)
+    }
 
     return respuesta.json()
+}
+
+// DELETE, eliminar viaje
+export async function eliminarViaje(id) {
+    const respuesta = await fetch(`${VIAJES_URL}/${id}`, {
+        method: "DELETE"
+    })
+
+    if (!respuesta.ok) {
+        throw new Error(`Error al eliminar viaje. HTTP ${respuesta.status}`)
+    }
 }
