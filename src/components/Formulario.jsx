@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
 import { useEnviarViaje } from "../hooks/useViajes"
 import { viaje } from "../schemas/viaje"
+import { obtenerHoy } from "../logic"
 
 export default function Formulario() {
     // gestionar envio viaje
@@ -12,9 +13,11 @@ export default function Formulario() {
         register, 
         handleSubmit, 
         reset,
-        formState: { errors } 
+        formState: { errors, isSubmitting } 
     } = useForm({ 
         resolver: zodResolver(viaje),
+        // poner cursor en error 
+        shouldFocusError: true,
         defaultValues: {
             destino: "",
             salida: "",
@@ -36,34 +39,36 @@ export default function Formulario() {
                 id = "destino"
                 etiqueta = "Destino"
                 placeholder = "Croacia"
-                register = {register}
                 error = {errors.destino}
+                register = {register}
             />
             <div className = "fechas">
                 <Field 
                     id = "salida"
                     etiqueta = "Salida"
                     type = "date"
-                    register = {register}
+                    min = {obtenerHoy()}
                     error = {errors.salida}
+                    register = {register}
                 />
                 <Field 
                     id = "regreso"
                     etiqueta = "Regreso"
                     type = "date"
-                    register = {register}
+                    min = {obtenerHoy()}
                     error = {errors.regreso}
+                    register = {register}
                 />
             </div>
             <Field 
                 id = "presupuesto"
-                etiqueta = "Presupuesto"
+                etiqueta = "Presupuesto en euros"
                 type = "number"
                 placeholder = "500"
-                register = {register}
                 error = {errors.presupuesto}
+                register = {register}
             />
-            <button type = "submit" disabled = {mutacion.isPending}>
+            <button type = "submit" disabled = {isSubmitting || mutacion.isPending}>
                 {mutacion.isPending ? "Enviando..." : "Enviar"}
             </button>
             {mutacion.isSuccess && (

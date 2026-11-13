@@ -12,6 +12,11 @@
     box-sizing: border-box;
 }
 
+:focus-visible {
+    outline: 1px solid var(--oscuro);
+    outline-offset: 2px;
+}
+
 body {
     background-color: var(--blanco);
     color: var(--oscuro);
@@ -124,7 +129,7 @@ main {
 .field input:focus {
     border-color: var(--oscuro);
     color: var(--oscuro);
-    outline: none;
+    
 }
 
 .field input::placeholder {
@@ -133,6 +138,10 @@ main {
 
 .field span {
     color: var(--rojo);
+}
+
+.field input[aria-invalid = "true"] {
+    border-color: var(--rojo);
 }
 
 .fechas {
