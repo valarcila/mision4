@@ -1,11 +1,19 @@
 import { z } from "zod"
-import { obtenerHoy } from "../logic"
+import { validarFecha, obtenerHoy } from "../logic"
 
 export const viaje = z
     .object({
         destino: z.string().trim().min(3, "Destino debe tener al menos tres caracteres"),
-        salida: z.string().min(1, "Debe haber fecha de salida"),
-        regreso: z.string().min(1, "Debe haber fecha de regreso"),
+        salida: z.string()
+                .min(1, "Debe haber fecha de salida")
+                .refine((value) => value === "" ||validarFecha(value),
+                    "Salida debe ser fecha válida"
+                ),
+        regreso: z.string()
+                .min(1, "Debe haber fecha de regreso")
+                .refine((value) => value === "" ||validarFecha(value),
+                    "Regreso debe ser fecha válida"
+                ),
         presupuesto: z.preprocess(
             // field vacio es undefined no cero
             (value) => value === "" ? undefined : value,

@@ -128,8 +128,7 @@ main {
 
 .field input:focus {
     border-color: var(--oscuro);
-    color: var(--oscuro);
-    
+    color: var(--oscuro);   
 }
 
 .field input::placeholder {

@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const viaje = z
+export const viajeApi = z
     .object({
         id: z.string(),
         destino: z.string(),
@@ -10,4 +10,4 @@ export const viaje = z
     })
 
 // validar array de viajes
-export const viajes = z.array(viaje)
+export const viajes = z.array(viajeApi)
