@@ -1,11 +1,11 @@
 {
   "viajes": [
     {
-      "destino": "Italia",
-      "salida": "2026-11-27",
-      "regreso": "2026-12-04",
-      "presupuesto": 300,
-      "id": "jdIk51LA4tw"
+      "destino": "Croacia",
+      "salida": "2027-01-23",
+      "regreso": "2027-01-30",
+      "presupuesto": 600,
+      "id": "PulHG01gn40"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

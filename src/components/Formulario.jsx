@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form"
+import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
 import { useEnviarViaje } from "../hooks/useViajes"
@@ -12,7 +12,7 @@ export default function Formulario() {
     const { 
         register, 
         handleSubmit, 
-        watch,
+        control,
         reset,
         formState: { errors, isSubmitting } 
     } = useForm({ 
@@ -28,7 +28,10 @@ export default function Formulario() {
     })
 
     // observar cambios salida
-    const salida = watch("salida")
+    const salida = useWatch({
+        control,
+        name: "salida"
+    })
 
     function onSubmit(data) {
         mutacion.mutate(data, {

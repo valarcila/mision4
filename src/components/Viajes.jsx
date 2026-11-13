@@ -6,7 +6,7 @@ export default function Viajes({ data }) {
             <h2>Viajes</h2>
 
             {data.length === 0 ? (
-                <p>No hay viajes planificados todavía.</p>
+                <p>No hay viajes planificados todavía</p>
             ) : (
                 <div className = "viajes">
                     {data.map((viaje) => (

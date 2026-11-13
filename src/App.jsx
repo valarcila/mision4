@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Header aplicacion = "ATLAS" autora = "Valeria"/>
+      <Header aplicacion = "ATLAS" autora = "Valeria Arcila Rodríguez"/>
       <main>
         {isPending || isError ? (
           <Estado 

@@ -29,6 +29,18 @@ export function obtenerHoy(){
     return `${ano}-${mes}-${dia}`
 }
 
+// formatear fechas
+export function formatearFecha(value) {
+    const [ano, mes, dia] = value.split("-")
+
+    const fecha = new Date(ano, mes - 1, dia)
+
+    return new Intl.DateTimeFormat("es-ES", {
+        day: "numeric",
+        month: "long"
+    }).format(fecha)
+}
+
 // contar viajes
 export function contarViajes(viajes) {
     return viajes.length
