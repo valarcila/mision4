@@ -15,7 +15,7 @@ export const viaje = z
             (value) => value === "" ? undefined : value,
             z.coerce.number({error: "Presupuesto debe ser número válido"})
                     .positive("Presupuesto debe ser mayor que cero")
-                    .max(1000, "Presupuesto no debe ser superar los mil euros")
+                    .max(1000, "Presupuesto no debe superar los mil euros")
         )  
     })
     .refine((data) => data.salida >= obtenerHoy(), {

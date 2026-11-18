@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { obtenerViajes, enviarViaje, eliminarViaje } from "../services/api"
 
-const VIAJES_KEY = ["viajes"]
+const VIAJES_KEY = ["viajes", "list"]
 
 // gestionar obtencion viajes
 export function useObtenerViajes() {

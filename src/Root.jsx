@@ -6,7 +6,7 @@ const queryClient = new QueryClient({
         queries: {
             // considerar reciente data durante 60 s
             staleTime: 60 * 1000,
-            // reintentar una vex si falla
+            // reintentar una vez si falla
             retry: 1
         }
     }
