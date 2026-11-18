@@ -29,8 +29,21 @@ export function obtenerHoy(){
     return `${ano}-${mes}-${dia}`
 }
 
+export function formatearFechas(salida, regreso) {
+    if (salida === regreso) return formatearFecha(salida)
+
+    // formatear si mismo año y mes
+    if(salida.slice(0, 7) === regreso.slice(0, 7)) {
+        const dia = Number(salida.slice(8, 10))
+
+        return `${dia} al ${formatearFecha(regreso)}`
+    }
+
+    return `${formatearFecha(salida)} al ${formatearFecha(regreso)}`
+}
+
 // formatear fechas
-export function formatearFecha(value) {
+function formatearFecha(value) {
     const [ano, mes, dia] = value.split("-")
 
     const fecha = new Date(ano, mes - 1, dia)

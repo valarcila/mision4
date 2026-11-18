@@ -1,5 +1,5 @@
 import { useEliminarViaje } from "../hooks/useViajes"
-import { formatearFecha } from "../logic"
+import { formatearFechas } from "../logic"
 
 export default function Viaje({ viaje }) {
     const mutacion = useEliminarViaje()
@@ -8,7 +8,7 @@ export default function Viaje({ viaje }) {
         <>
             <article className = "viaje">
                 <h3>{viaje.destino}</h3>
-                <p>{formatearFecha(viaje.salida)} al {formatearFecha(viaje.regreso)}</p>
+                <p>{formatearFechas(viaje.salida, viaje.regreso)}</p>
                 <p>{viaje.presupuesto} euros</p>
                 <button
                     type = "button"
