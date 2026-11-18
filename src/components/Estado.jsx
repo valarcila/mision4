@@ -1,5 +1,5 @@
 export default function Estado({ cargando, error, reintentar }) {
-    if (cargando) return <p className = "cargando">Cargando viajes...</p>
+    if (cargando) return <p className = "cargando" role = "status">Cargando viajes...</p>
 
     if (error) {
         return (

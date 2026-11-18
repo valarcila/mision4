@@ -1,6 +1,7 @@
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
+import useTemporizador from "../hooks/UseTemporizador"
 import { useEnviarViaje } from "../hooks/useViajes"
 import { viaje } from "../schemas/viaje"
 import { obtenerHoy } from "../logic"
@@ -9,11 +10,14 @@ export default function Formulario() {
     // gestionar envio viaje
     const mutacion = useEnviarViaje()
 
+    useTemporizador(mutacion.isSuccess, mutacion.reset)
+
     const { 
         register, 
         handleSubmit, 
         control,
         reset,
+        setFocus,
         formState: { errors, isSubmitting } 
     } = useForm({ 
         resolver: zodResolver(viaje),
@@ -35,20 +39,18 @@ export default function Formulario() {
 
     function onSubmit(data) {
         mutacion.mutate(data, {
-            onSuccess: () => reset()
+            onSuccess: () => {
+                reset()
+                // dejar que termine
+                setTimeout(() => {
+                    setFocus("destino")
+                }, 0)
+            }
         })
     }
 
     return (
-        <form 
-            className = "formulario" 
-            onSubmit = {handleSubmit(onSubmit)} 
-            onChange = {() => {
-                // desaparecer mensaje anterior
-                if (mutacion.isSuccess || mutacion.isError) mutacion.reset()
-            }}
-            noValidate
-        >
+        <form className = "formulario" onSubmit = {handleSubmit(onSubmit)} noValidate>
             <h2>Nuevo viaje</h2>
             <Field 
                 id = "destino"

@@ -41,6 +41,22 @@ export function formatearFecha(value) {
     }).format(fecha)
 }
 
+export function validarViajes(schema, data) {
+    // comprobar data con zod
+    const resultado = schema.safeParse(data)
+
+    if (!resultado.success) {
+        const error = resultado.error.issues[0]
+
+        throw new Error(
+            // error.path, indicar donde esta el error
+            `Viajes no válidos en ${error.path.join(" ") || "respuesta"}: ${error.message}`
+        )
+    } 
+
+    return resultado.data
+}
+
 // contar viajes
 export function contarViajes(viajes) {
     return viajes.length

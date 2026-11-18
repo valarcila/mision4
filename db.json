@@ -1,11 +1,46 @@
 {
   "viajes": [
     {
-      "destino": "Croacia",
-      "salida": "2027-01-23",
-      "regreso": "2027-01-30",
+      "destino": "CITKLASK",
+      "salida": "2026-11-20",
+      "regreso": "2026-11-27",
       "presupuesto": 600,
-      "id": "PulHG01gn40"
+      "id": "fDi8fSyChN4"
+    },
+    {
+      "destino": "aaa",
+      "salida": "2026-11-19",
+      "regreso": "2026-11-19",
+      "presupuesto": 33,
+      "id": "q2Pj-I91ea0"
+    },
+    {
+      "destino": "CITKLASK",
+      "salida": "2026-11-27",
+      "regreso": "2026-12-04",
+      "presupuesto": 22,
+      "id": "dUit-zf_5u4"
+    },
+    {
+      "destino": "dlfkggskjn",
+      "salida": "2026-11-28",
+      "regreso": "2026-12-05",
+      "presupuesto": 44,
+      "id": "e4mRWjPuZt4"
+    },
+    {
+      "destino": "CITKLASK",
+      "salida": "2026-12-06",
+      "regreso": "2027-01-02",
+      "presupuesto": 600,
+      "id": "RHfnuRsTRmI"
+    },
+    {
+      "destino": "CITKLASK",
+      "salida": "2026-12-06",
+      "regreso": "2027-01-02",
+      "presupuesto": 600,
+      "id": "8RpLtDLH2Kw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

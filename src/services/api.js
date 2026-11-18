@@ -1,9 +1,9 @@
-import { viajes } from "../schemas/viajes"
+import { viajeApi, viajes } from "../schemas/viajes"
+import { validarViajes } from "../logic"
 
 // api
 const API_URL = import.meta.env.VITE_API_URL
 const VIAJES_URL = `${API_URL}/viajes`
-
 
 // GET, obtener viajes
 export async function obtenerViajes() {
@@ -16,12 +16,7 @@ export async function obtenerViajes() {
     // convertir json en js
     const data = await respuesta.json()
 
-    // comprobar data con zod
-    const resultado = viajes.safeParse(data)
-
-    if (!resultado.success) throw new Error("Viajes recibidos no válidos")
-
-    return resultado.data
+    return validarViajes(viajes, data)
 }
 
 // POST, enviar viaje
@@ -40,7 +35,9 @@ export async function enviarViaje(viaje) {
         throw new Error(`Error al enviar viaje. HTTP ${respuesta.status}`)
     }
 
-    return respuesta.json()
+    const data = await respuesta.json() 
+
+    return validarViajes(viajeApi, data)
 }
 
 // DELETE, eliminar viaje
