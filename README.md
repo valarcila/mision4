@@ -1,8 +1,12 @@
 # Misión 4
+
+Programación web I, cliente.
+
 Atlas es una aplicación que permite guardar y organizar información sobre los viajes planificados, incluyendo el destino, las fechas de salida y regreso y el presupuesto. Calcula la cantidad de viajes y la suma de sus presupuestos.
 
 ## Cómo probarlo
-Se debe arrancar dos terminales:
+
+Se debe ejecutar `npm install` y arrancar dos terminales:
 
 1. **vite**. Ejecutar `npm run dev` para iniciar la aplicación.
 
@@ -31,6 +35,7 @@ La aplicación se divide en tres partes:
     Si algún field no cumple las condiciones, aparece un mensaje de error debajo del mismo.
 
 ## `safeParse()`
+
 Además de validar los datos del formulario con zod, se utiliza `safeParse()` para comprobar que las respuestas de la api cumplen los esquemas definidos, tanto en GET (obtener los viajes) como en POST (enviar un viaje).
 
 Para asegurar su funcionamiento, se modificó temporalmente un viaje de db.json, cambiando el presupuesto de número a string.
@@ -46,6 +51,7 @@ Para asegurar su funcionamiento, se modificó temporalmente un viaje de db.json,
 Al recargar la aplicación, `safeParse()` detectó que el presupuesto no era un número y mostró un mensaje de error indicando el field incorrecto: índice = 2, field = presupuesto.
 
 ## Uso de IA
+
 Utilicé claude para resolver dudas durante el desarrollo.
 
 **Prompt 1. Hay alguna función de rhf que permita dirigir el cursor a un field concreto después de enviar un formulario?**
@@ -57,6 +63,7 @@ La respuesta fue usar `setFocus()` con `setTimeout(..., 0)` dentro de `onSubmit(
 Aunque el formulario ya utiliza `type = "date"`, webi recomendó validar también las fechas con zod. Implementé la función `validarFecha()` que comprueba que la fecha tenga el formato `aaaa-mm-dd` y que sea una fecha real, evitando aceptar fechas inexistentes como el 30 de febrero.
 
 ## Autopsia
+
 **Decisión 1. Uso `preprocess()`.**
 
 Decidí utilizar `preprocess()` para evitar que zod interpretara un presupuesto vacío como cero y mostrara el error "Presupuesto debe ser mayor que cero". 
