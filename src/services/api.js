@@ -10,7 +10,7 @@ export async function obtenerViajes() {
     const respuesta = await fetch(VIAJES_URL)
 
     if (!respuesta.ok) {
-        throw new Error(`Error al obtener viajes. HTTP ${respuesta.status}`)
+        throw new Error(`No se pudieron cargar viajes. HTTP ${respuesta.status}`)
     }
 
     // convertir json en js
@@ -32,7 +32,7 @@ export async function enviarViaje(viaje) {
     })
 
     if (!respuesta.ok) {
-        throw new Error(`Error al enviar viaje. HTTP ${respuesta.status}`)
+        throw new Error(`No se pudo guardar viaje. HTTP ${respuesta.status}`)
     }
 
     const data = await respuesta.json() 
@@ -47,6 +47,6 @@ export async function eliminarViaje(id) {
     })
 
     if (!respuesta.ok) {
-        throw new Error(`Error al eliminar viaje. HTTP ${respuesta.status}`)
+        throw new Error(`No se pudo eliminar viaje. HTTP ${respuesta.status}`)
     }
 }

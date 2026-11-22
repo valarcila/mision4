@@ -12,7 +12,11 @@ export default function Viaje({ viaje }) {
                 <p>{viaje.presupuesto} euros</p>
                 <button
                     type = "button"
-                    onClick = {() => mutacion.mutate(viaje.id)}
+                    onClick = {() => {
+                        if (window.confirm(`¿Eliminar viaje a ${viaje.destino}?`)) {
+                            mutacion.mutate(viaje.id)
+                        }
+                    }}
                     disabled = {mutacion.isPending}
                 >
                     {mutacion.isPending ? "Eliminando..." : "Eliminar"}

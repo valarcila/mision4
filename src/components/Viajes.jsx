@@ -1,6 +1,10 @@
 import Viaje from "./Viaje"
 
 export default function Viajes({ data }) {
+    const ordenados = [...data].sort(
+        (a, b) => a.salida.localeCompare(b.salida)
+    )
+
     return (
         <section className = "contenedor_viajes">
             <h2>Viajes</h2>
@@ -9,7 +13,7 @@ export default function Viajes({ data }) {
                 <p>No hay viajes planificados todavía</p>
             ) : (
                 <div className = "viajes">
-                    {data.map((viaje) => (
+                    {ordenados.map((viaje) => (
                         <Viaje key = {viaje.id} viaje = {viaje} />
                     ))}
                 </div>
