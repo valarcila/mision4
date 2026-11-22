@@ -29,29 +29,47 @@ export function obtenerHoy(){
     return `${ano}-${mes}-${dia}`
 }
 
-export function formatearFechas(salida, regreso) {
-    if (salida === regreso) return formatearFecha(salida)
+export function validarFields(schema, fields) {
+    return (payload) => schema.pick(fields).safeParse(payload.value).success
+}
 
-    // formatear si mismo año y mes
+export function formatearFechas(salida, regreso) {
+    if (salida === regreso) return formatearFecha(salida, true)
+
+    // formatear si mismo ano y mes
     if(salida.slice(0, 7) === regreso.slice(0, 7)) {
         const dia = Number(salida.slice(8, 10))
 
-        return `${dia} al ${formatearFecha(regreso)}`
+        return `${dia} al ${formatearFecha(regreso, true)}`
     }
 
-    return `${formatearFecha(salida)} al ${formatearFecha(regreso)}`
+    // formatear si mismo ano
+    if (salida.slice(0, 4) === regreso.slice(0, 4)) {
+        return `${formatearFecha(salida)} al ${formatearFecha(regreso, true)}`
+    }
+
+    return `${formatearFecha(salida, true)} al ${formatearFecha(regreso, true)}`
 }
 
 // formatear fechas
-function formatearFecha(value) {
+function formatearFecha(value, mostrarAno = false) {
     const [ano, mes, dia] = value.split("-")
 
     const fecha = new Date(ano, mes - 1, dia)
 
     return new Intl.DateTimeFormat("es-ES", {
         day: "numeric",
-        month: "long"
+        month: "long",
+        ...(mostrarAno && { year: "numeric" }) 
     }).format(fecha)
+}
+
+// error si api devuelve data no valida
+export class ErrorValidacion extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "ErrorValidacion"
+    }
 }
 
 export function validarViajes(schema, data) {
@@ -61,7 +79,7 @@ export function validarViajes(schema, data) {
     if (!resultado.success) {
         const error = resultado.error.issues[0]
 
-        throw new Error(
+        throw new ErrorValidacion(
             // error.path, indicar donde esta el error
             `Viajes no válidos en ${error.path.join(" ") || "respuesta"}: ${error.message}`
         )

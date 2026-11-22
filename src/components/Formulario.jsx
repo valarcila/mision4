@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Field from "./Field"
@@ -5,7 +6,6 @@ import useTemporizador from "../hooks/useTemporizador"
 import { useEnviarViaje } from "../hooks/useViajes"
 import { viaje } from "../schemas/viaje"
 import { obtenerHoy } from "../logic"
-import { useEffect } from "react"
 
 export default function Formulario() {
     // gestionar envio viaje

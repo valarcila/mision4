@@ -1,13 +1,13 @@
 import { z } from "zod"
-import { validarFecha } from "../logic"
+import { destinoSchema, fechaSchema, presupuestoSchema } from "./fields"
 
 export const viajeApi = z
     .object({
         id: z.string(),
-        destino: z.string(),
-        salida: z.string().refine(validarFecha),
-        regreso: z.string().refine(validarFecha),
-        presupuesto: z.number().positive()
+        destino: destinoSchema,
+        salida: fechaSchema,
+        regreso: fechaSchema,
+        presupuesto: presupuestoSchema,
     })
 
 // validar array de viajes
