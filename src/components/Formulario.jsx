@@ -5,6 +5,7 @@ import useTemporizador from "../hooks/useTemporizador"
 import { useEnviarViaje } from "../hooks/useViajes"
 import { viaje } from "../schemas/viaje"
 import { obtenerHoy } from "../logic"
+import { useEffect } from "react"
 
 export default function Formulario() {
     // gestionar envio viaje
@@ -18,7 +19,9 @@ export default function Formulario() {
         control,
         reset,
         setFocus,
-        formState: { errors, isSubmitting } 
+        trigger,
+        getFieldState,
+        formState: { errors, isSubmitting, isSubmitted } 
     } = useForm({ 
         resolver: zodResolver(viaje),
         // poner cursor en error 
@@ -36,6 +39,14 @@ export default function Formulario() {
         control,
         name: "salida"
     })
+
+    // revalidar regreso si cambia salida
+    useEffect(() => {
+        // si regreso modificado o submitted
+        if (getFieldState("regreso").isTouched || isSubmitted) {
+            void trigger("regreso")
+        }
+    }, [salida, trigger, getFieldState, isSubmitted])
 
     function onSubmit(data) {
         mutacion.mutate(data, {

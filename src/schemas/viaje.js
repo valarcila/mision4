@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { validarFecha, obtenerHoy } from "../logic"
 
-export const viaje = z
+const fields = z
     .object({
         destino: z.string().trim().min(3, "Destino debe tener al menos tres caracteres"),
         salida: z.string()
@@ -18,11 +18,23 @@ export const viaje = z
                     .max(1000, "Presupuesto no debe superar los mil euros")
         )  
     })
+
+export const viaje = fields
     .refine((data) => data.salida >= obtenerHoy(), {
         error: "Salida debe ser hoy o posterior",
-        path: ["salida"]
+        path: ["salida"],
+        // validar aunque otros fields tengan errores
+        when(payload) {
+            return fields.pick({salida: true}).safeParse(payload.value).success
+        }
     })
     .refine((data) => data.regreso >= data.salida, {
         error: "Regreso debe ser igual o posterior a salida",
-        path: ["regreso"]
+        path: ["regreso"],
+        when(payload) {
+            return fields.pick({
+                salida: true,
+                regreso: true
+            }).safeParse(payload.value).success
+        }
     })
